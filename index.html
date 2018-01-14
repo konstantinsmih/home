@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Homepage</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/weather-icons.min.css">
+  </head>
+  <body class="bg-light">
+    <div class="frequent-links-container container-fluid bg-info font-weight-bold">
+      <ul class="nav justify-content-center">
+	  
+	    <li class="nav-item">
+          <a class="nav-link text-dark" target="_blank" href="https://calendar.google.com">Calendar</a>
+        </li>
+		
+        <li class="nav-item">
+          <a class="nav-link text-dark" target="_blank" href="https://drive.google.com">Drive</a>
+        </li>	
+		
+	    <li class="nav-item">
+          <a class="nav-link text-dark" target="_blank" href="https://facebook.com">Facebook</a>
+        </li>
+		
+        <li class="nav-item">
+          <a class="nav-link text-dark" target="_blank" href="https://github.com/konstantinsmih/home">Github</a>
+        </li>		
+		
+		
+		
+        <li class="nav-item">
+          <a class="nav-link text-dark" target="_blank" href="https://gmail.com">Gmail</a>
+        </li>
+		
+        <li class="nav-item">
+          <a class="nav-link text-dark" target="_blank" href="https://keep.google.com">Keep</a>
+        </li>
+		
+
+		
+        <li class="nav-item">
+          <a class="nav-link text-dark" target="_blank" href="https://photos.google.com">Photos</a>
+        </li>
+		
+
+		
+
+		
+        <li class="nav-item">
+          <a class="nav-link text-dark" target="_blank" href="https://reddit.com">Reddit</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" target="_blank" href="https://youtube.com">Youtube</a>
+        </li>		
+      </ul>
+  </div>
+  <div class="weather-container container-fluid text-center text-info text-uppercase mt-3 mb-3">
+    <a href="https://openweathermap.org/city/456172" target="_blank" class="text-info" style="text-decoration:none;">
+      <p class="weather-icon" style="font-size:700%"></p>
+      <p class="weather-description"></p>
+      <p class="weather-temperature"></p>
+      <p class="weather-sun"></p>
+    </a>
+  </div>
+
+<div class="forecast-container-new container text-center mb-5">
+  <div class="row bg-info p-2">
+    <div class="col time-small"></div>
+    <div class="col time-small"></div>
+    <div class="col time-small"></div>
+    <div class="col time-small"></div>
+  </div>
+  <div class="row p-2" style="font-size: 300%;">
+    <div class="col icon-small"></div>
+    <div class="col icon-small"></div>
+    <div class="col icon-small"></div>
+    <div class="col icon-small"></div>
+  </div>
+  <div class="row p-2">
+    <div class="col description-small"></div>
+    <div class="col description-small"></div>
+    <div class="col description-small"></div>
+    <div class="col description-small"></div>
+  </div>
+  <div class="row p-2">
+    <div class="col temperature-small"></div>
+    <div class="col temperature-small"></div>
+    <div class="col temperature-small"></div>
+    <div class="col temperature-small"></div>
+  </div>
+  <div class="row p-2">
+    <div class="col wind-small"></div>
+    <div class="col wind-small"></div>
+    <div class="col wind-small"></div>
+    <div class="col wind-small"></div>
+  </div>
+</div>
+
+  <div class="wallpaper-container container-fluid fixed-bottom d-none d-xl-block"></div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        // API
+        var weather_obj = 'https://api.openweathermap.org/data/2.5/weather?id=456172&APPID=606dbd5cefebc8404b37098896b6c256&units=metric';
+        var weather_full_obj = 'https://api.openweathermap.org/data/2.5/forecast?id=456172&APPID=606dbd5cefebc8404b37098896b6c256&units=metric';
+        var wallpaper_obj = 'https://www.reddit.com/r/EarthPorn/random.json';
+        // large weather
+        $.getJSON(weather_obj, function(data) {
+           $("p.weather-icon").html('<i class="wi wi-owm-'+data.weather[0].id+'"></i>');
+           $("p.weather-description").html(data.weather[0].description);
+           $("p.weather-temperature").html(data.main.temp + ' &#176C');
+         });
+
+         //wallpaper
+         $.getJSON(wallpaper_obj, function(data) {
+           $("div.wallpaper-container").html('<a target="_blank" href="' + data["0"].data.children["0"].data.url + '">' + '<img style="position:fixed; bottom:20px; right:20px; max-height:250px;" class="img-thumbnail" src="'+ data["0"].data.children["0"].data.preview.images["0"].resolutions[2].url +'""></a>');
+         });
+
+         //weather table
+         $.getJSON(weather_full_obj, function(data) {
+
+           $("div.time-small").each(function(i) {
+             $(this).html(data.list[i].dt_txt.slice(10, 16));
+           });
+
+           $("div.icon-small").each(function(i) {
+             $(this).html("<i class='wi wi-owm-" + data.list[i].weather["0"].id + "'></i>");
+           });
+
+           $("div.description-small").each(function(i) {
+             $(this).html(data.list[i].weather["0"].description);
+           });
+
+           $("div.temperature-small").each(function(i) {
+             $(this).html(Math.round(data.list[i].main.temp) + ' &#176C');
+           });
+
+           $("div.wind-small").each(function(i) {
+             $(this).html(Math.round(data.list[i].wind.speed) + ' m/s');
+           });
+
+         });
+
+         $('a').click(function() {
+           location.reload();
+         });
+      });
+    </script>
+  </body>
+</html>
