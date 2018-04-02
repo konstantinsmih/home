@@ -13,49 +13,49 @@
   <body class="bg-light">
     <div class="frequent-links-container container-fluid bg-info font-weight-bold">
       <ul class="nav justify-content-center">
-	  
+
 	    <li class="nav-item">
           <a class="nav-link text-dark" target="_blank" href="https://calendar.google.com">Calendar</a>
         </li>
-		
+
         <li class="nav-item">
           <a class="nav-link text-dark" target="_blank" href="https://drive.google.com">Drive</a>
-        </li>	
-		
+        </li>
+
 	    <li class="nav-item">
           <a class="nav-link text-dark" target="_blank" href="https://facebook.com">Facebook</a>
         </li>
-		
+
         <li class="nav-item">
           <a class="nav-link text-dark" target="_blank" href="https://github.com/konstantinsmih/home">Github</a>
-        </li>		
-		
-		
-		
+        </li>
+
+
+
         <li class="nav-item">
           <a class="nav-link text-dark" target="_blank" href="https://gmail.com">Gmail</a>
         </li>
-		
+
         <li class="nav-item">
           <a class="nav-link text-dark" target="_blank" href="https://keep.google.com">Keep</a>
         </li>
-		
 
-		
+
+
         <li class="nav-item">
           <a class="nav-link text-dark" target="_blank" href="https://photos.google.com">Photos</a>
         </li>
-		
 
-		
 
-		
+
+
+
         <li class="nav-item">
           <a class="nav-link text-dark" target="_blank" href="https://reddit.com">Reddit</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-dark" target="_blank" href="https://youtube.com">Youtube</a>
-        </li>		
+        </li>
       </ul>
   </div>
   <div class="weather-container container-fluid text-center text-info text-uppercase mt-3 mb-3">
@@ -100,6 +100,11 @@
   </div>
 </div>
 
+<div class="news-container container text-center mb-5">
+  <p>NEWS</p>
+</div>
+
+
   <div class="wallpaper-container container-fluid fixed-bottom d-none d-xl-block"></div>
 
     <!-- Optional JavaScript -->
@@ -113,6 +118,8 @@
         var weather_obj = 'https://api.openweathermap.org/data/2.5/weather?id=456172&APPID=606dbd5cefebc8404b37098896b6c256&units=metric';
         var weather_full_obj = 'https://api.openweathermap.org/data/2.5/forecast?id=456172&APPID=606dbd5cefebc8404b37098896b6c256&units=metric';
         var wallpaper_obj = 'https://www.reddit.com/r/EarthPorn/random.json';
+        var news_obj = 'https://librenews.io/api';
+
         // large weather
         $.getJSON(weather_obj, function(data) {
            $("p.weather-icon").html('<i class="wi wi-owm-'+data.weather[0].id+'"></i>');
@@ -149,6 +156,10 @@
            });
 
          });
+         // news
+         $.getJSON(news_obj, function(data) {
+           console.log(data);
+});
 
          $('a').click(function() {
            location.reload();
