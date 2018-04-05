@@ -120,6 +120,17 @@
 	      console.log(data);
 		      });
 	      
+	      $.ajax({
+  crossOrigin: true,
+  //proxy: "http://www.domain.com/path/proxy.php" -> to overide default proxy
+  url: 'https://librenews.io/api',
+  success: function(data) {
+	console.log(data);
+  }
+});
+	      
+	      
+	      
 	      
         // large weather
         $.getJSON(weather_obj, function(data) {
