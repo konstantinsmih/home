@@ -113,33 +113,11 @@
         var weather_obj = 'https://api.openweathermap.org/data/2.5/weather?id=456172&APPID=606dbd5cefebc8404b37098896b6c256&units=metric';
         var weather_full_obj = 'https://api.openweathermap.org/data/2.5/forecast?id=456172&APPID=606dbd5cefebc8404b37098896b6c256&units=metric';
         var wallpaper_obj = 'https://www.reddit.com/r/EarthPorn/random.json';
-        var news = 'https://librenews.io/api';
-	      
-	            //  $.getJSON(news, function(data) {
-
-	      //console.log(data);
-		      //});
-	      
-	      $.ajax({
-  crossOrigin: true,
-  //proxy: "http://www.domain.com/path/proxy.php" -> to overide default proxy
-  url: 'https://librenews.io/api',
-  headers: {"Access-Control-Allow-Origin": "https://konstantinsmih.github.io"},
-
-  success: function(data) {
-	console.log(data.channels[0]);
-  }
-});
-	      
-	      
-	      
-	      
         // large weather
         $.getJSON(weather_obj, function(data) {
            $("p.weather-icon").html('<i class="wi wi-owm-'+data.weather[0].id+'"></i>');
            $("p.weather-description").html(data.weather[0].description);
            $("p.weather-temperature").html(data.main.temp + ' &#176C');
-		console.log(data);
          });
 
          //wallpaper
