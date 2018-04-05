@@ -115,17 +115,19 @@
         var wallpaper_obj = 'https://www.reddit.com/r/EarthPorn/random.json';
         var news = 'https://librenews.io/api';
 	      
-	              $.getJSON(news, function(data) {
+	            //  $.getJSON(news, function(data) {
 
 	      //console.log(data);
-		      });
+		      //});
 	      
 	      $.ajax({
-  crossOrigin: false,
+  crossOrigin: true,
   //proxy: "http://www.domain.com/path/proxy.php" -> to overide default proxy
   url: 'https://librenews.io/api',
+  headers: {"Access-Control-Allow-Origin": "https://konstantinsmih.github.io"},
+
   success: function(data) {
-	console.log(data);
+	console.log(data.channels[0]);
   }
 });
 	      
